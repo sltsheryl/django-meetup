@@ -53,11 +53,12 @@ def getFavs(request):
 @api_view(['POST'])
 def createMeetup(request):
     data = request.data
+    
     meetup = Meetup.objects.create(
         title=data['title'],
         description=data['description'],
         address=data['address'],
-        image=data['image'],
+        image=request.FILES['image'],
         isFavorite=False
     )
     serializer = MeetupSerializer(meetup, many=False)
